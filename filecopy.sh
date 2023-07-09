@@ -28,13 +28,18 @@ put -r \'$local$folder\' \'$remote\'\n" | sftp "$host"
 
 
 main_loop () {
-    while IFS="," read -r local remote folder host
+    while IFS="," read -r local remote folder host enabled
     do
     if [ ! -e "$local" ]; then
         printf "Warning: $local does not appear to exist...\n"
     fi
-    printf "Uploading a entry...\n"
-    do_entry
+    if [[ $enabled == "TRUE" ]]; then
+        printf "Uploading a entry...\n"
+        do_entry
+    else
+        printf "Skipping Entry...\n"
+    fi
+
     done < <(tail -n +2 locations.csv)
 
 }
