@@ -34,10 +34,10 @@ main_loop () {
         printf "Warning: $local does not appear to exist...\n"
     fi
     if [[ $enabled == "TRUE" ]]; then
-        printf "Uploading a entry...\n"
+        printf "\033[32mUploading an entry...\033[m\n"
         do_entry
     else
-        printf "Skipping Entry...\n"
+        printf "\033[33mSkipping entry...\033[m\n"
     fi
 
     done < <(tail -n +2 locations.csv)
